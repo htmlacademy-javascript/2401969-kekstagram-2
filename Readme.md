@@ -1,7 +1,8 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Виктор Волошенко](https://up.htmlacademy.ru/javascript-individual/2/user/2401969).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Беллавин](https://htmlacademy.ru/profile/id226241).
+* Страница проекта: [Kekstagram-Kontur](https://htmlacademy-javascript.github.io/2401969-kekstagram-2/1/).
 
 ---
 
