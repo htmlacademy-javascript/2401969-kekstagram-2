@@ -2,7 +2,7 @@
 
 const checkLength = (string, maxLength) => string.length <= maxLength;
 
-console.log(checkLength('abracadabra', 15));
+checkLength('abracadabra', 15);
 
 // Проверка на палиндром с использованием цикла
 
@@ -15,7 +15,7 @@ const checkPalindrom = (string) => {
   return normilizedString === reverseString;
 };
 
-console.log(checkPalindrom('Аргентина манит негра'));
+checkPalindrom('Аргентина манит негра');
 
 // Проверка на палиндром с использований методов объектов
 
@@ -25,7 +25,7 @@ const isPalindrom = (string) => {
   return normilizedString === reverseString;
 };
 
-console.log(isPalindrom('Кекс'));
+isPalindrom('Кекс');
 
 // Извлечение чисел из строки с использованием цикла
 
@@ -40,7 +40,7 @@ const isNumber = (string) => {
   return parseInt(resultString, 10);
 };
 
-console.log(isNumber('1 литр рома на 1,5 литра колы'));
+isNumber('1 литр рома на 1,5 литра колы');
 
 // Извлечение чисел из строки через преобразование строки в объект
 
@@ -55,4 +55,4 @@ const extractNumber = (string) => {
   return parseInt(resultString, 10);
 };
 
-console.log(extractNumber('2,5 грамма протеина на 1 кг массы тела'));
+extractNumber('2,5 грамма протеина на 1 кг массы тела');
