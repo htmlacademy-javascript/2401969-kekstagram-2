@@ -117,3 +117,5 @@ const createGallery = (quantity) => {
 
 // eslint-disable-next-line no-console
 console.log(createGallery(25));
+
+export { createGallery };
