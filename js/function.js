@@ -1,8 +1,8 @@
 // Проверка на максимальную длину строки
 
-const checkLength = (string, maxLength) => string.length <= maxLength;
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-checkLength('abracadabra', 15);
+checkStringLength('abracadabra', 15);
 
 // Проверка на палиндром с использованием цикла
 
@@ -56,3 +56,35 @@ const extractNumber = (string) => {
 };
 
 extractNumber('2,5 грамма протеина на 1 кг массы тела');
+
+// Определяем рандомное значение
+
+const getRandomInteger = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+// Проверяем его на уникальность (возвращаем рандомное значение, ранее не использованое в блоке)
+
+const getRandomUniqueInteger = (min, max) => {
+  const uniqueIntArr = [];
+  return () => {
+    while (uniqueIntArr.length < max - min + 1) {
+      const randomInt = getRandomInteger(min, max);
+      if (!uniqueIntArr.includes(randomInt)) {
+        uniqueIntArr.push(randomInt);
+        return randomInt;
+      }
+    }
+  };
+};
+
+// Получаем рандомный элемент любого массива
+
+const getRandomArrayElement = (elements) =>
+  elements[getRandomInteger(0, elements.length - 1)];
+
+export {
+  getRandomInteger,
+  checkStringLength,
+  getRandomUniqueInteger,
+  getRandomArrayElement,
+};
