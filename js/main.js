@@ -52,6 +52,31 @@ const NAMES = [
   'Виктор',
 ];
 
+// Задаём максимальное кол-во комментов
+
+const MAX_COMMENTS = 500;
+
+// Задаём диапазон кол-ва аватаров
+
+const AvatarRange = {
+  MIN: 1,
+  MAX: 6,
+};
+
+// Задаём диапазон кол-ва лайков
+
+const LikesRange = {
+  MIN: 1,
+  MAX: 200,
+};
+
+// Задаём диапазон кол-ва комментариев
+
+const MessagesRange = {
+  MIN: 1,
+  MAX: 30,
+};
+
 // Определяем рандомное значение
 
 const getRandomInteger = (min, max) =>
@@ -61,7 +86,7 @@ const getRandomInteger = (min, max) =>
 
 const getRandomUniqueInteger = (min, max) => {
   const uniqueIntArr = [];
-  return function () {
+  return () => {
     while (uniqueIntArr.length < max - min + 1) {
       const randomInt = getRandomInteger(min, max);
       if (!uniqueIntArr.includes(randomInt)) {
@@ -72,75 +97,42 @@ const getRandomUniqueInteger = (min, max) => {
   };
 };
 
-// Получаем url фото
+// Получаем рандомный элемент любого массива
 
-const createPhotoUrl = (index) => `photos/${index}.jpeg`;
-
-// Получаем рандомный индекс элемента любого массива
-
-const getRandomArrayIndex = (elements) =>
+const getRandomArrayElement = (elements) =>
   elements[getRandomInteger(0, elements.length - 1)];
-
-// Задаём диапазон кол-ва лайков
-
-const LikesRange = {
-  min: 1,
-  max: 200,
-};
-
-// Задаём максимальное кол-во комментов
-
-const maxComments = 500;
-
-// Получаем url аватара
-
-const createAvatarUrl = (index) => `img/avatar-${index}.svg`;
-
-// Задаём диапазон кол-ва аватаров
-
-const AvatarRange = {
-  min: 1,
-  max: 6,
-};
 
 // Создаём  объект - комментарий
 
 const createComment = () => {
-  const randomCommentId = getRandomUniqueInteger(1, maxComments);
-  const randomAvatarUrl = getRandomUniqueInteger(
-    AvatarRange.min,
-    AvatarRange.max
-  );
+  const uniqueCommentId = getRandomUniqueInteger(1, MAX_COMMENTS);
   return {
-    id: randomCommentId(),
-    avatar: createAvatarUrl(randomAvatarUrl()),
-    message: getRandomArrayIndex(MESSAGES),
-    name: getRandomArrayIndex(NAMES),
+    id: uniqueCommentId(),
+    avatar: `img/avatar-${getRandomInteger(
+      AvatarRange.MIN,
+      AvatarRange.MAX
+    )}.svg`,
+    message: getRandomArrayElement(MESSAGES),
+    name: getRandomArrayElement(NAMES),
   };
-};
-
-// Задаём диапазон кол-ва комментариев
-
-const MessagesRange = {
-  min: 1,
-  max: 30,
 };
 
 // Создаём галлерею - массив объектов - фото
 
 const createGallery = (quantity) => {
-  const randomId = getRandomUniqueInteger(1, quantity);
-  const randomPhotoUrl = getRandomUniqueInteger(1, quantity);
+  const uniquePhotoId = getRandomUniqueInteger(1, quantity);
+  const uniquePhotoUrl = getRandomUniqueInteger(1, quantity);
   return Array.from({ length: quantity }).map(() => ({
-    id: randomId(),
-    url: createPhotoUrl(randomPhotoUrl()),
-    description: getRandomArrayIndex(DESCRIPTIONS),
-    likes: getRandomInteger(LikesRange.min, LikesRange.max),
+    id: uniquePhotoId(),
+    url: `photos/${uniquePhotoUrl()}.jpeg`,
+    description: getRandomArrayElement(DESCRIPTIONS),
+    likes: getRandomInteger(LikesRange.MIN, LikesRange.MAX),
     comments: Array.from(
-      { length: getRandomInteger(MessagesRange.min, MessagesRange.max) },
+      { length: getRandomInteger(MessagesRange.MIN, MessagesRange.MAX) },
       createComment
     ),
   }));
 };
 
-createGallery(25);
+// eslint-disable-next-line no-console
+console.log(createGallery(25));
