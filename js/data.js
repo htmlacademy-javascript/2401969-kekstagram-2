@@ -2,7 +2,7 @@ import {
   getRandomInteger,
   getRandomUniqueInteger,
   getRandomArrayElement,
-} from './functions.js';
+} from './utils.js';
 
 // Массив описаний
 
@@ -58,6 +58,8 @@ const NAMES = [
   'Виктор',
 ];
 
+const POST_COUNT = 25;
+
 // Задаём максимальное кол-во комментов
 
 const MAX_COMMENTS = 500;
@@ -100,10 +102,10 @@ const createComment = () => {
 
 // Создаём галлерею - массив объектов - фото
 
-const createGallery = (quantity) => {
-  const uniquePhotoId = getRandomUniqueInteger(1, quantity);
-  const uniquePhotoUrl = getRandomUniqueInteger(1, quantity);
-  return Array.from({ length: quantity }).map(() => ({
+const createGallery = () => {
+  const uniquePhotoId = getRandomUniqueInteger(1, POST_COUNT);
+  const uniquePhotoUrl = getRandomUniqueInteger(1, POST_COUNT);
+  return Array.from({ length: POST_COUNT }).map(() => ({
     id: uniquePhotoId(),
     url: `photos/${uniquePhotoUrl()}.jpeg`,
     description: getRandomArrayElement(DESCRIPTIONS),
