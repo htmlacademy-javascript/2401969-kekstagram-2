@@ -2,7 +2,7 @@ import {
   getRandomInteger,
   getRandomUniqueInteger,
   getRandomArrayElement,
-} from './functions.js';
+} from './utils.js';
 
 // Массив описаний
 
@@ -105,7 +105,7 @@ const createGallery = (quantity) => {
   const uniquePhotoUrl = getRandomUniqueInteger(1, quantity);
   return Array.from({ length: quantity }).map(() => ({
     id: uniquePhotoId(),
-    url: `photos/${uniquePhotoUrl()}.jpeg`,
+    url: `photos/${uniquePhotoUrl()}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomInteger(LikesRange.MIN, LikesRange.MAX),
     comments: Array.from(
