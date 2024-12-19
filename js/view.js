@@ -1,15 +1,16 @@
 const renderGallery = (gallery) => {
-  const picturesContainer = document.querySelector('.pictures');
-  const pictureTemplate = document
+  const picturesContainerElement = document.querySelector('.pictures');
+  const pictureTemplateElement = document
     .querySelector('#picture')
     .content.querySelector('.picture');
   const pictureFragment = document.createDocumentFragment();
 
   gallery.forEach(({ id, url, description, likes, comments }) => {
-    const pictureElement = pictureTemplate.cloneNode(true);
+    const pictureElement = pictureTemplateElement.cloneNode(true);
     const imgElement = pictureElement.querySelector('.picture__img');
     const likesElement = pictureElement.querySelector('.picture__likes');
     const commentsElement = pictureElement.querySelector('.picture__comments');
+    pictureElement.href = url;
     imgElement.dataset.id = id;
     imgElement.src = url;
     imgElement.alt = description;
@@ -18,7 +19,7 @@ const renderGallery = (gallery) => {
     pictureFragment.appendChild(pictureElement);
   });
 
-  picturesContainer.appendChild(pictureFragment);
+  picturesContainerElement.appendChild(pictureFragment);
 };
 
 export { renderGallery };
