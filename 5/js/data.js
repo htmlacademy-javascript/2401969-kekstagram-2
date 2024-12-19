@@ -107,7 +107,7 @@ const createGallery = () => {
   const uniquePhotoUrl = getRandomUniqueInteger(1, POST_COUNT);
   return Array.from({ length: POST_COUNT }).map(() => ({
     id: uniquePhotoId(),
-    url: `photos/${uniquePhotoUrl()}.jpeg`,
+    url: `photos/${uniquePhotoUrl()}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomInteger(LikesRange.MIN, LikesRange.MAX),
     comments: Array.from(
