@@ -58,8 +58,6 @@ const NAMES = [
   'Виктор',
 ];
 
-const POST_COUNT = 25;
-
 // Задаём максимальное кол-во комментов
 
 const MAX_COMMENTS = 500;
@@ -102,10 +100,10 @@ const createComment = () => {
 
 // Создаём галлерею - массив объектов - фото
 
-const createGallery = () => {
-  const uniquePhotoId = getRandomUniqueInteger(1, POST_COUNT);
-  const uniquePhotoUrl = getRandomUniqueInteger(1, POST_COUNT);
-  return Array.from({ length: POST_COUNT }).map(() => ({
+const createGallery = (quantity) => {
+  const uniquePhotoId = getRandomUniqueInteger(1, quantity);
+  const uniquePhotoUrl = getRandomUniqueInteger(1, quantity);
+  return Array.from({ length: quantity }).map(() => ({
     id: uniquePhotoId(),
     url: `photos/${uniquePhotoUrl()}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),

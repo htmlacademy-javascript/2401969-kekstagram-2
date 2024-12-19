@@ -1,4 +1,6 @@
 import { createGallery } from './data.js';
 import { renderGallery } from './view.js';
 
-renderGallery(createGallery());
+const photosPreview = createGallery(25);
+
+renderGallery(photosPreview);

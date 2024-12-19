@@ -11,7 +11,7 @@ const renderGallery = (gallery) => {
     const likesElement = pictureElement.querySelector('.picture__likes');
     const commentsElement = pictureElement.querySelector('.picture__comments');
     pictureElement.href = url;
-    imgElement.dataset.id = id;
+    pictureElement.dataset.id = id;
     imgElement.src = url;
     imgElement.alt = description;
     likesElement.textContent = likes;
