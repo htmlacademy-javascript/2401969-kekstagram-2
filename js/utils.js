@@ -27,9 +27,14 @@ const getRandomUniqueInteger = (min, max) => {
 const getRandomArrayElement = (elements) =>
   elements[getRandomInteger(0, elements.length - 1)];
 
+// Проверяем является ли клавиша "Escape"
+
+const isEscKey = (evt) => evt.key === 'Escape';
+
 export {
   getRandomInteger,
   checkStringLength,
   getRandomUniqueInteger,
   getRandomArrayElement,
+  isEscKey,
 };
