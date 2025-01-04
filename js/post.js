@@ -2,7 +2,7 @@ import { isEscKey } from './utils.js';
 import { renderBigPicture } from './picture.js';
 import { clearComments } from './comments.js';
 
-const renderPost = (posts) => {
+const renderPost = (photosPreview) => {
   const userModalElement = document.body.querySelector('.big-picture');
   const userModalOpenElement = document.querySelector('.pictures');
   const userModalCloseElement = userModalElement.querySelector(
@@ -37,7 +37,7 @@ const renderPost = (posts) => {
     const currentPictureElement = evt.target.closest('.picture');
     if (currentPictureElement) {
       evt.preventDefault();
-      const currentPreview = posts.find(
+      const currentPreview = photosPreview.find(
         (picture) =>
           picture.id === Number(currentPictureElement.dataset.pictureId)
       );
