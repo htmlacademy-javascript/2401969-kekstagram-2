@@ -1,6 +1,6 @@
-import { isEscKey } from './utils';
-import { runValidation, clearValidation } from './validation';
-import { runImageEdit, resetImageEdit } from './edit';
+import { isEscKey } from './utils.js';
+import { runValidation, clearValidation } from './validation.js';
+import { runImageEdit, resetImageEdit } from './edit.js';
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFormInputElement =
