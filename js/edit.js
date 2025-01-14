@@ -14,7 +14,7 @@ const filterLevelSliderElement = filterLevelElement.querySelector(
 );
 const filtersListElement = document.querySelector('.effects__list');
 
-const SCALE = {
+const Scale = {
   MIN: 0.25,
   MAX: 1,
   STEP: 0.25,
@@ -67,7 +67,7 @@ const filters = {
   },
 };
 
-let scaleValue = SCALE.DEFAULT;
+let scaleValue = Scale.DEFAULT;
 
 const changeScale = (value) => {
   scaleValue = value;
@@ -76,14 +76,14 @@ const changeScale = (value) => {
 };
 
 const smallerScale = () => {
-  if (scaleValue > SCALE.MIN) {
-    changeScale(scaleValue - SCALE.STEP);
+  if (scaleValue > Scale.MIN) {
+    changeScale(scaleValue - Scale.STEP);
   }
 };
 
 const biggerScale = () => {
-  if (scaleValue < SCALE.MAX) {
-    changeScale(scaleValue + SCALE.STEP);
+  if (scaleValue < Scale.MAX) {
+    changeScale(scaleValue + Scale.STEP);
   }
 };
 
@@ -97,15 +97,13 @@ const createSlider = () => {
     step: 1,
     connect: 'lower',
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   });
 };
@@ -114,34 +112,37 @@ filtersListElement.addEventListener('change', (evt) => {
   evt.stopPropagation();
 
   if (evt.target.value === 'none') {
-    filterLevelElement.classList.add('hidden');
-    imageUploadElement.style.setProperty('filter', '');
-  } else {
-    filterLevelElement.classList.remove('hidden');
-    filterLevelSliderElement.noUiSlider.updateOptions({
-      range: {
-        min: filters[evt.target.value].min,
-        max: filters[evt.target.value].max,
-      },
-      start: filters[evt.target.value].start,
-      step: filters[evt.target.value].step,
-    });
-
-    filterLevelSliderElement.noUiSlider.on('update', () => {
-      filterLevelValueElement.setAttribute(
-        'value',
-        filterLevelSliderElement.noUiSlider.get()
-      );
-
-      const effectValue = filters[evt.target.value].filter;
-      const unit = filters[evt.target.value].unit;
-
-      imageUploadElement.style.setProperty(
-        'filter',
-        `${effectValue}(${filterLevelValueElement.value}${unit})`
-      );
-    });
+    const removeFilter = () => {
+      filterLevelElement.classList.add('hidden');
+      imageUploadElement.style.setProperty('filter', '');
+    };
+    return removeFilter;
   }
+
+  filterLevelElement.classList.remove('hidden');
+  filterLevelSliderElement.noUiSlider.updateOptions({
+    range: {
+      min: filters[evt.target.value].min,
+      max: filters[evt.target.value].max,
+    },
+    start: filters[evt.target.value].start,
+    step: filters[evt.target.value].step,
+  });
+
+  filterLevelSliderElement.noUiSlider.on('update', () => {
+    filterLevelValueElement.setAttribute(
+      'value',
+      filterLevelSliderElement.noUiSlider.get()
+    );
+
+    const effectValue = filters[evt.target.value].filter;
+    const unit = filters[evt.target.value].unit;
+
+    imageUploadElement.style.setProperty(
+      'filter',
+      `${effectValue}(${filterLevelValueElement.value}${unit})`
+    );
+  });
 });
 
 const runImageEdit = () => {
@@ -160,7 +161,7 @@ const runImageEdit = () => {
 const resetImageEdit = () => {
   filterLevelSliderElement.noUiSlider.reset();
   filterLevelElement.classList.add('hidden');
-  scaleValue = SCALE.DEFAULT;
+  scaleValue = Scale.DEFAULT;
   imageUploadElement.style.removeProperty('filter');
   imageUploadElement.style.removeProperty('transform');
 };
