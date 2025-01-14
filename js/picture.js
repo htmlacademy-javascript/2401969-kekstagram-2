@@ -1,4 +1,4 @@
-import { renderComments } from './comments';
+import { renderComments } from './comments.js';
 
 const bigPictureElement = document.body.querySelector('.big-picture');
 const imgElement = bigPictureElement.querySelector('img');
@@ -9,8 +9,8 @@ const commentTotalCountElement = bigPictureElement.querySelector(
 );
 
 const renderBigPicture = ({ url, likes, comments, description }) => {
-  imgElement.src = url;
-  imgElement.alt = description;
+  imgElement.setAttribute('src', url);
+  imgElement.setAttribute('alt', description);
   likesElement.textContent = likes;
   commentTotalCountElement.textContent = comments.length;
   descriptionElement.textContent = description;

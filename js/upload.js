@@ -1,17 +1,17 @@
 import { isEscKey } from './utils';
 import { runValidation, clearValidation } from './validation';
+import { runImageEdit, resetImageEdit } from './edit';
 
-const imgUploadFormElement = document.querySelector('.img-upload__form');
-const imgUploadFormInput =
-  imgUploadFormElement.querySelector('.img-upload__input');
-const hashtagsInputElement =
-  imgUploadFormElement.querySelector('.text__hashtags');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const uploadFormInputElement =
+  uploadFormElement.querySelector('.img-upload__input');
+const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement =
-  imgUploadFormElement.querySelector('.text__description');
-const imgUploadOverlay = imgUploadFormElement.querySelector(
+  uploadFormElement.querySelector('.text__description');
+const uploadOverlayElement = uploadFormElement.querySelector(
   '.img-upload__overlay'
 );
-const uploadFormCloseElement = imgUploadFormElement.querySelector(
+const uploadFormCloseElement = uploadFormElement.querySelector(
   '.img-upload__cancel'
 );
 
@@ -25,7 +25,7 @@ const onDocumentEscKeydown = (evt) => {
       evt.stopPropagation();
     } else {
       closeUploadForm();
-      imgUploadFormElement.reset();
+      uploadFormElement.reset();
     }
   }
 };
@@ -34,20 +34,21 @@ const onCloseButtonClick = () => closeUploadForm();
 
 function closeUploadForm() {
   clearValidation();
+  resetImageEdit();
   document.body.classList.remove('modal-open');
-  imgUploadOverlay.classList.add('hidden');
+  uploadOverlayElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentEscKeydown);
-  uploadFormCloseElement.removeEventListener('click', onCloseButtonClick);
-  imgUploadFormInput.value = '';
+  uploadFormInputElement.setAttribute('value', '');
 }
 
 const openUploadForm = () => {
-  imgUploadFormInput.addEventListener('change', () => {
-    runValidation();
+  uploadFormInputElement.addEventListener('change', () => {
     document.body.classList.add('modal-open');
-    imgUploadOverlay.classList.remove('hidden');
+    uploadOverlayElement.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentEscKeydown);
     uploadFormCloseElement.addEventListener('click', onCloseButtonClick);
+    runValidation();
+    runImageEdit();
   });
 };
 

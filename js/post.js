@@ -3,9 +3,9 @@ import { renderBigPicture } from './picture.js';
 import { clearComments } from './comments.js';
 
 const renderPost = (photosPreview) => {
-  const userModalElement = document.body.querySelector('.big-picture');
-  const userModalOpenElement = document.querySelector('.pictures');
-  const userModalCloseElement = userModalElement.querySelector(
+  const userPostElement = document.body.querySelector('.big-picture');
+  const userPostOpenElement = document.querySelector('.pictures');
+  const userPostCloseElement = userPostElement.querySelector(
     '.big-picture__cancel'
   );
 
@@ -18,18 +18,14 @@ const renderPost = (photosPreview) => {
 
   function closeUserMоdal() {
     document.body.classList.remove('modal-open');
-    userModalElement.classList.add('hidden');
+    userPostElement.classList.add('hidden');
     document.removeEventListener('keydown', onDocumentEscKeydown);
     clearComments();
   }
 
-  userModalCloseElement.addEventListener('click', () => {
-    closeUserMоdal();
-  });
-
   const openUserModal = () => {
     document.body.classList.add('modal-open');
-    userModalElement.classList.remove('hidden');
+    userPostElement.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentEscKeydown);
   };
 
@@ -39,14 +35,19 @@ const renderPost = (photosPreview) => {
       evt.preventDefault();
       const currentPreview = photosPreview.find(
         (picture) =>
-          picture.id === Number(currentPictureElement.dataset.pictureId)
+          picture.id ===
+          Number(currentPictureElement.getAttribute('data-picture-id'))
       );
       renderBigPicture(currentPreview);
       openUserModal();
     }
   };
 
-  userModalOpenElement.addEventListener('click', onPreviewClick);
+  userPostOpenElement.addEventListener('click', onPreviewClick);
+
+  userPostCloseElement.addEventListener('click', () => {
+    closeUserMоdal();
+  });
 };
 
 export { renderPost };

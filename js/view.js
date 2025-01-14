@@ -10,10 +10,9 @@ const renderGallery = (gallery) => {
     const imgElement = pictureElement.querySelector('.picture__img');
     const likesElement = pictureElement.querySelector('.picture__likes');
     const commentsElement = pictureElement.querySelector('.picture__comments');
-    pictureElement.href = url;
-    pictureElement.dataset.pictureId = id;
-    imgElement.src = url;
-    imgElement.alt = description;
+    pictureElement.setAttribute('data-picture-id', id);
+    imgElement.setAttribute('src', url);
+    imgElement.setAttribute('alt', description);
     likesElement.textContent = likes;
     commentsElement.textContent = comments.length;
     pictureFragment.appendChild(pictureElement);
