@@ -19,10 +19,10 @@ const commentsLoaderElement =
 const renderComment = ({ avatar, name, message }) => {
   const commentElement = commentItemElement.cloneNode(true);
   const commentImgElement = commentElement.querySelector('.social__picture');
-  const commentText = commentElement.querySelector('.social__text');
-  commentImgElement.src = avatar;
-  commentImgElement.alt = name;
-  commentText.textContent = message;
+  const commentTextElement = commentElement.querySelector('.social__text');
+  commentImgElement.setAttribute('src', avatar);
+  commentImgElement.setAttribute('alt', name);
+  commentTextElement.textContent = message;
   return commentElement;
 };
 
