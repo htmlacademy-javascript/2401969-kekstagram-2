@@ -1,4 +1,4 @@
-import '../vendor/pristine/pristine.min.js';
+import '@vendor/pristine/pristine.min.js';
 
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT_LENGTH = 140;

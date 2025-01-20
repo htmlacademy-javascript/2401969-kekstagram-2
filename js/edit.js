@@ -1,4 +1,4 @@
-import '../vendor/nouislider/nouislider.js';
+import '@vendor/nouislider/nouislider.js';
 
 const imageUploadScaleElement = document.querySelector('.img-upload__scale');
 const scaleValueElement = imageUploadScaleElement.querySelector(
@@ -116,7 +116,7 @@ filtersListElement.addEventListener('change', (evt) => {
       filterLevelElement.classList.add('hidden');
       imageUploadElement.style.setProperty('filter', '');
     };
-    return removeFilter;
+    return removeFilter();
   }
 
   filterLevelElement.classList.remove('hidden');

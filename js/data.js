@@ -1,4 +1,4 @@
-import {
+/*import {
   getRandomInteger,
   getRandomUniqueInteger,
   getRandomArrayElement,
@@ -115,4 +115,4 @@ const createGallery = (quantity) => {
   }));
 };
 
-export { createGallery };
+export { createGallery };*/
