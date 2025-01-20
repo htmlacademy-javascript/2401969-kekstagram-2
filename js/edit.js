@@ -116,7 +116,7 @@ filtersListElement.addEventListener('change', (evt) => {
       filterLevelElement.classList.add('hidden');
       imageUploadElement.style.setProperty('filter', '');
     };
-    return removeFilter;
+    return removeFilter();
   }
 
   filterLevelElement.classList.remove('hidden');

@@ -1,10 +1,16 @@
-import { createGallery } from './data.js';
 import { renderGallery } from './view.js';
 import { renderPost } from './post.js';
 import { openUploadForm } from './upload.js';
+import { getData } from './api.js';
+import { dataErrorMessage } from './messages.js';
 
-const photosPreview = createGallery(25);
+getData()
+  .then((data) => {
+    renderGallery(data);
+    renderPost(data);
+  })
+  .catch(() => {
+    dataErrorMessage();
+  });
 
-renderGallery(photosPreview);
-renderPost(photosPreview);
 openUploadForm();
