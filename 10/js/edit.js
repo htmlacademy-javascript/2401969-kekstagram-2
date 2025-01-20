@@ -1,4 +1,4 @@
-import '@vendor/nouislider/nouislider.js';
+import '../vendor/nouislider/nouislider.js';
 
 const imageUploadScaleElement = document.querySelector('.img-upload__scale');
 const scaleValueElement = imageUploadScaleElement.querySelector(
