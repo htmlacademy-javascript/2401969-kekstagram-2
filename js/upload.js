@@ -7,6 +7,9 @@ import { sendMessage } from './messages.js';
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFormInputElement =
   uploadFormElement.querySelector('.img-upload__input');
+const uploadImageElement = uploadFormElement.querySelector(
+  '.img-upload__preview img'
+);
 const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement =
   uploadFormElement.querySelector('.text__description');
@@ -53,6 +56,8 @@ const openUploadForm = () => {
 };
 
 uploadFormInputElement.addEventListener('change', () => {
+  const file = uploadFormInputElement.files[0];
+  uploadImageElement.src = URL.createObjectURL(file);
   document.body.classList.add('modal-open');
   uploadOverlayElement.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentEscKeydown);

@@ -3,10 +3,12 @@ import { renderPost } from './post.js';
 import { openUploadForm } from './upload.js';
 import { getData } from './api.js';
 import { dataErrorMessage } from './messages.js';
+import { runImageFilter, filterGallery } from './filter.js';
 
 getData()
   .then((data) => {
-    renderGallery(data);
+    runImageFilter(data);
+    renderGallery(filterGallery());
     renderPost(data);
   })
   .catch(() => {
