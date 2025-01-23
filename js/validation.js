@@ -1,6 +1,7 @@
 import '../vendor/pristine/pristine.min.js';
 
-const MAX_HASHTAGS = 5;
+const MAX_HASHTAGS_QTY = 5;
+const MAX_HASHTAG_LENGTH = 20;
 const MAX_COMMENT_LENGTH = 140;
 
 const uploadFormElement = document.querySelector('.img-upload__form');
@@ -32,7 +33,7 @@ const validatesHashtagRepeats = (value) => {
 };
 
 const validatesHashtagCount = (value) =>
-  getValues(value).length <= MAX_HASHTAGS;
+  getValues(value).length <= MAX_HASHTAGS_QTY;
 
 const isValidate = (evt) => {
   if (!pristine.validate()) {
@@ -44,22 +45,22 @@ const runValidation = () => {
   pristine.addValidator(
     commentElement,
     validatesCommentLength,
-    `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`
+    `Длина комментария больше ${MAX_COMMENT_LENGTH} символов.`
   );
   pristine.addValidator(
     hashtagsElement,
     validatesHashtagWithRegex,
-    'Хэштег должен начинаться с # и содержать буквы и цифры до 20 символов'
+    `Хэштег должен начинаться с # и содержать буквы и цифры до ${MAX_HASHTAG_LENGTH} символов.`
   );
   pristine.addValidator(
     hashtagsElement,
     validatesHashtagRepeats,
-    'Хэштеги повторяются'
+    'Хэштеги повторяются.'
   );
   pristine.addValidator(
     hashtagsElement,
     validatesHashtagCount,
-    'Превышено количество хэштегов'
+    `Превышено количество хэштегов. Максимальное количество ${MAX_HASHTAGS_QTY}.`
   );
 
   uploadFormElement.addEventListener('submit', isValidate);

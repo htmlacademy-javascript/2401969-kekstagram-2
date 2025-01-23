@@ -5,6 +5,10 @@ const renderGallery = (gallery) => {
     .content.querySelector('.picture');
   const pictureFragment = document.createDocumentFragment();
 
+  picturesContainerElement
+    .querySelectorAll('.picture')
+    .forEach((element) => element.remove());
+
   gallery.forEach(({ id, url, description, likes, comments }) => {
     const pictureElement = pictureTemplateElement.cloneNode(true);
     const imgElement = pictureElement.querySelector('.picture__img');
