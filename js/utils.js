@@ -49,6 +49,8 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
+const randomSort = () => Math.random() - 0.5;
+
 export {
   getRandomInteger,
   checkStringLength,
@@ -56,4 +58,5 @@ export {
   getRandomArrayElement,
   isEscKey,
   debounce,
+  randomSort,
 };

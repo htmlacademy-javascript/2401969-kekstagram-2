@@ -1,15 +1,14 @@
 import { isEscKey } from './utils.js';
-import { runValidation, clearValidation } from './validation.js';
+import { runValidation, clearValidation, pristine } from './validation.js';
 import { runImageEdit, resetImageEdit } from './edit.js';
 import { sendData } from './api.js';
 import { sendMessage } from './messages.js';
+import { addFilePreview } from './preview.js';
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFormInputElement =
   uploadFormElement.querySelector('.img-upload__input');
-const uploadImageElement = uploadFormElement.querySelector(
-  '.img-upload__preview img'
-);
+
 const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
 const descriptionInutElement =
   uploadFormElement.querySelector('.text__description');
@@ -33,7 +32,6 @@ const onDocumentEscKeydown = (evt) => {
       evt.stopPropagation();
     } else {
       closeUploadForm();
-      //uploadFormElement.reset();
     }
   }
 };
@@ -41,13 +39,12 @@ const onDocumentEscKeydown = (evt) => {
 const onCloseButtonClick = () => closeUploadForm();
 
 function closeUploadForm() {
-  clearValidation();
-  resetImageEdit();
   document.body.classList.remove('modal-open');
   uploadOverlayElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentEscKeydown);
-  //uploadFormInputElement.setAttribute('value', '');
   uploadFormElement.reset();
+  resetImageEdit();
+  clearValidation();
 }
 
 const openUploadForm = () => {
@@ -56,8 +53,7 @@ const openUploadForm = () => {
 };
 
 uploadFormInputElement.addEventListener('change', () => {
-  const file = uploadFormInputElement.files[0];
-  uploadImageElement.src = URL.createObjectURL(file);
+  addFilePreview();
   document.body.classList.add('modal-open');
   uploadOverlayElement.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentEscKeydown);
@@ -66,21 +62,25 @@ uploadFormInputElement.addEventListener('change', () => {
 
 uploadFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  const isValid = pristine.validate();
 
-  const formDataObject = new FormData(evt.target);
+  if (isValid) {
+    uploadSubmitElement.setAttribute('disabled', 'true');
+    const formDataObject = new FormData(evt.target);
 
-  uploadSubmitElement.setAttribute('disabled', '');
-
-  sendData(formDataObject)
-    .then(() => {
-      closeUploadForm();
-      sendMessage(true);
-    })
-    .catch(() => {
-      document.removeEventListener('keydown', onDocumentEscKeydown);
-      sendMessage(false);
-    })
-    .finally(uploadSubmitElement.removeAttribute('disabled', ''));
+    sendData(formDataObject)
+      .then(() => {
+        closeUploadForm();
+        sendMessage(true);
+      })
+      .catch(() => {
+        document.removeEventListener('keydown', onDocumentEscKeydown);
+        sendMessage(false);
+      })
+      .finally(() => {
+        uploadSubmitElement.removeAttribute('disabled');
+      });
+  }
 });
 
 export { openUploadForm };

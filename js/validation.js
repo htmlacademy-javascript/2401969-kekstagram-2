@@ -17,7 +17,7 @@ const pristine = new Pristine(uploadFormElement, {
 
 const validatesCommentLength = (value) => value.length <= MAX_COMMENT_LENGTH;
 
-const getValues = (value) => value.trim().split(' ');
+const getValues = (value) => value.trim().split(/ +/g);
 
 const validatesHashtagWithRegex = (value) => {
   const values = getValues(value);
@@ -26,7 +26,7 @@ const validatesHashtagWithRegex = (value) => {
 };
 
 const validatesHashtagRepeats = (value) => {
-  const duplicates = getValues(value).filter(
+  const duplicates = getValues(value.toLowerCase()).filter(
     (number, index, numbers) => numbers.indexOf(number) !== index
   );
   return duplicates.length === 0;
@@ -34,12 +34,6 @@ const validatesHashtagRepeats = (value) => {
 
 const validatesHashtagCount = (value) =>
   getValues(value).length <= MAX_HASHTAGS_QTY;
-
-const isValidate = (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
-  }
-};
 
 const runValidation = () => {
   pristine.addValidator(
@@ -62,13 +56,10 @@ const runValidation = () => {
     validatesHashtagCount,
     `Превышено количество хэштегов. Максимальное количество ${MAX_HASHTAGS_QTY}.`
   );
-
-  uploadFormElement.addEventListener('submit', isValidate);
 };
 
 const clearValidation = () => {
   pristine.reset();
-  uploadFormElement.removeEventListener('submit', isValidate);
 };
 
-export { runValidation, clearValidation };
+export { runValidation, clearValidation, pristine };

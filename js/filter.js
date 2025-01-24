@@ -1,4 +1,4 @@
-import { debounce } from './utils.js';
+import { debounce, randomSort } from './utils.js';
 import { renderGallery } from './view.js';
 
 const Filters = {
@@ -15,7 +15,7 @@ const imgFiltersElement = document.querySelector('.img-filters');
 
 const renderGalleryDebounced = debounce(renderGallery, RERENDER_DELAY);
 
-let currentFilter = '';
+let currentFilter = Filters.DEFAULT;
 let pictures = [];
 
 const runImageFilter = (data) => {
@@ -23,8 +23,6 @@ const runImageFilter = (data) => {
   pictures = [...data];
   currentFilter = Filters.DEFAULT;
 };
-
-const randomSort = () => Math.random() - 0.5;
 
 const discussedSort = (pictureA, pictureB) =>
   pictureB.comments.length - pictureA.comments.length;
