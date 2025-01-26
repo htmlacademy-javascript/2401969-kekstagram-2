@@ -27,7 +27,8 @@ const onDocumentEscKeydown = (evt) => {
     evt.preventDefault();
     if (
       document.activeElement === hashtagsInputElement ||
-      document.activeElement === descriptionInutElement
+      document.activeElement === descriptionInutElement ||
+      document.querySelector('.error')
     ) {
       evt.stopPropagation();
     } else {
@@ -35,8 +36,6 @@ const onDocumentEscKeydown = (evt) => {
     }
   }
 };
-
-const onCloseButtonClick = () => closeUploadForm();
 
 function closeUploadForm() {
   document.body.classList.remove('modal-open');
@@ -46,6 +45,8 @@ function closeUploadForm() {
   resetImageEdit();
   clearValidation();
 }
+
+const onCloseButtonClick = () => closeUploadForm();
 
 const openUploadForm = () => {
   runValidation();
@@ -74,7 +75,6 @@ uploadFormElement.addEventListener('submit', (evt) => {
         sendMessage(true);
       })
       .catch(() => {
-        document.removeEventListener('keydown', onDocumentEscKeydown);
         sendMessage(false);
       })
       .finally(() => {

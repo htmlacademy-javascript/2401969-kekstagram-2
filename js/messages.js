@@ -25,10 +25,6 @@ const sendMessage = (status) => {
     `.${result}__button`
   );
 
-  const onClickCloseMessage = () => {
-    closeMessage();
-  };
-
   const onEscCloseMessage = (evt) => {
     if (isEscKey(evt) && messageElement.isConnected) {
       evt.preventDefault();
@@ -48,6 +44,8 @@ const sendMessage = (status) => {
     document.removeEventListener('keydown', onEscCloseMessage);
     document.removeEventListener('click', onOverlayClick);
   }
+
+  const onClickCloseMessage = () => closeMessage();
 
   messageButtonElement.addEventListener('click', onClickCloseMessage);
   document.addEventListener('keydown', onEscCloseMessage);

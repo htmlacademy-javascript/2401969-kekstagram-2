@@ -21,7 +21,6 @@ let pictures = [];
 const runImageFilter = (data) => {
   imgFiltersElement.classList.remove('img-filters--inactive');
   pictures = [...data];
-  currentFilter = Filters.DEFAULT;
 };
 
 const discussedSort = (pictureA, pictureB) =>
