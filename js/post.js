@@ -43,11 +43,11 @@ const renderPost = (photosPreview) => {
     }
   };
 
+  const onCloseButtonClick = () => closeUserMоdal();
+
   userPostOpenElement.addEventListener('click', onPreviewClick);
 
-  userPostCloseElement.addEventListener('click', () => {
-    closeUserMоdal();
-  });
+  userPostCloseElement.addEventListener('click', onCloseButtonClick);
 };
 
 export { renderPost };

@@ -49,18 +49,20 @@ const renderShownComments = () => {
   currentCommentCount += COMMENT_STEP;
 };
 
+const onCommentsLoaderClick = () => renderShownComments();
+
 const renderComments = (comments) => {
   currentPostComments = comments;
   commentsListElement.innerHTML = '';
   renderShownComments();
-  commentsLoaderElement.addEventListener('click', renderShownComments);
+  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 };
 
 const clearComments = () => {
   currentCommentCount = 0;
   commentsListElement.innerHTML = '';
   commentsLoaderElement.classList.remove('hidden');
-  commentsLoaderElement.removeEventListener('click', renderShownComments);
+  commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
 };
 
 export { renderComments, clearComments };

@@ -162,6 +162,7 @@ const resetImageEdit = () => {
   filterLevelSliderElement.noUiSlider.reset();
   filterLevelElement.classList.add('hidden');
   scaleValue = Scale.DEFAULT;
+  scaleValueElement.setAttribute('value', `${scaleValue * 100}%`);
   imageUploadElement.style.removeProperty('filter');
   imageUploadElement.style.removeProperty('transform');
 };
