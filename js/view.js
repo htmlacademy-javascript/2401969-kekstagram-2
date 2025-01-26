@@ -1,4 +1,4 @@
-const renderGallery = (gallery) => {
+const renderGallery = (pictures) => {
   const picturesContainerElement = document.querySelector('.pictures');
   const pictureTemplateElement = document
     .querySelector('#picture')
@@ -9,7 +9,7 @@ const renderGallery = (gallery) => {
     .querySelectorAll('.picture')
     .forEach((element) => element.remove());
 
-  gallery.forEach(({ id, url, description, likes, comments }) => {
+  pictures.forEach(({ id, url, description, likes, comments }) => {
     const pictureElement = pictureTemplateElement.cloneNode(true);
     const imgElement = pictureElement.querySelector('.picture__img');
     const likesElement = pictureElement.querySelector('.picture__likes');

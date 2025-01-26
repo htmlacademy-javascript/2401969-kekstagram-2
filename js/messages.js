@@ -3,7 +3,7 @@ import { isEscKey } from './utils.js';
 const ERROR_SHOWN_TIME = 5000;
 const messageFragment = document.createDocumentFragment();
 
-const dataErrorMessage = () => {
+const showLoadErrorMessage = () => {
   const errorTemplateElement = document
     .querySelector('#data-error')
     .content.querySelector('.data-error');
@@ -13,7 +13,7 @@ const dataErrorMessage = () => {
   setTimeout(() => errorElement.remove(), ERROR_SHOWN_TIME);
 };
 
-const sendMessage = (status) => {
+const showSendMessage = (status) => {
   const result = status ? 'success' : 'error';
   const messageTemplateElement = document
     .querySelector(`#${result}`)
@@ -52,4 +52,4 @@ const sendMessage = (status) => {
   document.addEventListener('click', onOverlayClick);
 };
 
-export { dataErrorMessage, sendMessage };
+export { showLoadErrorMessage, showSendMessage };

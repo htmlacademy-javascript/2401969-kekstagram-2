@@ -2,7 +2,7 @@ import { renderGallery } from './view.js';
 import { renderPost } from './post.js';
 import { openUploadForm } from './upload.js';
 import { getData } from './api.js';
-import { dataErrorMessage } from './messages.js';
+import { showLoadErrorMessage } from './messages.js';
 import { runImageFilter, filterGallery } from './filter.js';
 
 getData()
@@ -12,7 +12,7 @@ getData()
     renderPost(data);
   })
   .catch(() => {
-    dataErrorMessage();
+    showLoadErrorMessage();
   });
 
 openUploadForm();

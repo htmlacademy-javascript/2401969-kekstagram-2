@@ -2,7 +2,7 @@ import { isEscKey } from './utils.js';
 import { runValidation, clearValidation, pristine } from './validation.js';
 import { runImageEdit, resetImageEdit } from './edit.js';
 import { sendData } from './api.js';
-import { sendMessage } from './messages.js';
+import { showSendMessage } from './messages.js';
 import { addFilePreview } from './preview.js';
 
 const uploadFormElement = document.querySelector('.img-upload__form');
@@ -72,10 +72,10 @@ uploadFormElement.addEventListener('submit', (evt) => {
     sendData(formDataObject)
       .then(() => {
         closeUploadForm();
-        sendMessage(true);
+        showSendMessage(true);
       })
       .catch(() => {
-        sendMessage(false);
+        showSendMessage(false);
       })
       .finally(() => {
         uploadSubmitElement.removeAttribute('disabled');
