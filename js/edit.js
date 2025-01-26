@@ -75,13 +75,13 @@ const changeScale = (value) => {
   scaleValueElement.setAttribute('value', `${scaleValue * 100}%`);
 };
 
-const smallerScale = () => {
+const scaleDown = () => {
   if (scaleValue > Scale.MIN) {
     changeScale(scaleValue - Scale.STEP);
   }
 };
 
-const biggerScale = () => {
+const scaleUp = () => {
   if (scaleValue < Scale.MAX) {
     changeScale(scaleValue + Scale.STEP);
   }
@@ -148,10 +148,10 @@ filtersListElement.addEventListener('change', (evt) => {
 const runImageEdit = () => {
   imageUploadScaleElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('scale__control--smaller')) {
-      smallerScale();
+      scaleDown();
     }
     if (evt.target.classList.contains('scale__control--bigger')) {
-      biggerScale();
+      scaleUp();
     }
   });
   createSlider();
